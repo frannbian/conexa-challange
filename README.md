@@ -25,6 +25,9 @@ docker-compose up -d
 After that the microservice will start at http//localhost:3000, you'll see a documentation & playground in route http://localhost:3000/api.
 
 
+## Postman collection
+https://documenter.getpostman.com/view/8606539/2sA3Qy6UbG
+
 ## Test
 
 ```bash
@@ -32,7 +35,7 @@ After that the microservice will start at http//localhost:3000, you'll see a doc
 $ npm run test
 
 # e2e tests
-$ npm run test:e2e
+$ npm run test:e2ehttps://github.com/frannbian/conexa-challange
 
 ```
 ## Plugins

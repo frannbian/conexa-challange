@@ -13,6 +13,7 @@ import { Movie } from './movies/movie.entity';
 import { Director } from './directors/director.entity';
 import { Actor } from './actors/actor.entity';
 import { Genre } from './genres/genre.entity';
+import { RolesGuard } from './users/guards/roles.guard';
 
 @Module({
   imports: [
@@ -22,8 +23,8 @@ import { Genre } from './genres/genre.entity';
       type: 'postgres',
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
+      username: 'postgres',
+      password: 'root',
       database: process.env.DB_NAME,
       entities: [User, Movie, Director, Actor, Genre],
       synchronize: true,
@@ -36,6 +37,10 @@ import { Genre } from './genres/genre.entity';
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

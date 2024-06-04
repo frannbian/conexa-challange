@@ -22,8 +22,8 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  create(email: string, password: string) {
-    const user = this.usersRepository.create({ email, password });
+  create(email: string, password: string, role: string) {
+    const user = this.usersRepository.create({ email, password, role });
 
     return this.usersRepository.save(user);
   }

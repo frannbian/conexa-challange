@@ -9,4 +9,7 @@ export class UserDto {
 
   @Expose()
   access_token: string;
+
+  @Expose()
+  role: string;
 }

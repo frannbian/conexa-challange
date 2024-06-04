@@ -20,11 +20,11 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: false })
-  admin: boolean;
-
   @OneToMany(() => Movie, (movie) => movie.user)
   movies: Movie[];
+
+  @Column({ default: null })
+  role: string;
 
   @AfterInsert()
   logInsert() {

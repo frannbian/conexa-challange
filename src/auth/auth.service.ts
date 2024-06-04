@@ -7,6 +7,7 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
+import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 
 const scrypt = promisify(_scrypt);
 
@@ -34,16 +35,15 @@ export class AuthService {
     if (storedHash !== hash.toString('hex')) {
       throw new UnauthorizedException();
     }
-
-    const payload = { sub: user.id, email: user.email };
+    const payload = { sub: user.id, email: user.email, role: user.role };
 
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
   }
 
-  async signup(email: string, password: string) {
-    const user = await this.usersService.findOne(email);
+  async signup(body: CreateUserDto) {
+    const user = await this.usersService.findOne(body.email);
     if (user) {
       throw new BadRequestException('email in use');
     }
@@ -53,13 +53,17 @@ export class AuthService {
     const salt = randomBytes(8).toString('hex');
 
     // Hash the salt and the password together
-    const hash = (await scrypt(password, salt, 32)) as Buffer;
+    const hash = (await scrypt(body.password, salt, 32)) as Buffer;
 
     // Join the hashed result and the salt together
     const result = salt + '.' + hash.toString('hex');
 
     // Create a new user and save it
-    const newUser = await this.usersService.create(email, result);
+    const newUser = await this.usersService.create(
+      body.email,
+      result,
+      body.role,
+    );
 
     // return the user
     return newUser;

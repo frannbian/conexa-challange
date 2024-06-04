@@ -30,13 +30,14 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('me')
   getProfile(@Request() req) {
+    console.log(req.user);
     return req.user;
   }
 
   @Public()
   @Post('/signup')
   async createUser(@Body() body: CreateUserDto) {
-    const user = await this.authService.signup(body.email, body.password);
+    const user = await this.authService.signup(body);
     return user;
   }
 }

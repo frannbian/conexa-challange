@@ -1,6 +1,6 @@
-# Conexa challange
+# NestJS Movies manager
 
-Moviews administrator
+Movies administrator
 
 ## Features
 

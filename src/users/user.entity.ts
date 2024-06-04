@@ -1,3 +1,4 @@
+import { Movie } from 'src/movies/movie.entity';
 import {
   AfterInsert,
   AfterRemove,
@@ -5,6 +6,7 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -20,6 +22,9 @@ export class User {
 
   @Column({ default: false })
   admin: boolean;
+
+  @OneToMany(() => Movie, (movie) => movie.user)
+  movies: Movie[];
 
   @AfterInsert()
   logInsert() {

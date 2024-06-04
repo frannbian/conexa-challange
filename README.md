@@ -22,7 +22,17 @@ cp .env.example .env
 docker-compose up -d
 
 ```
-After that the microservice will start at http//localhost:3000, you'll see a documentation & playground in route http://localhost/api.
+After that the microservice will start at http//localhost:3000, you'll see a documentation & playground in route http://localhost:3000/api.
+
+
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
 
 ## Plugins
 

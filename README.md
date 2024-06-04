@@ -34,6 +34,7 @@ $ npm run test
 # e2e tests
 $ npm run test:e2e
 
+```
 ## Plugins
 
 This project is currently extended with the following plugins.

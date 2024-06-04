@@ -35,7 +35,7 @@ https://documenter.getpostman.com/view/8606539/2sA3Qy6UbG
 $ npm run test
 
 # e2e tests
-$ npm run test:e2ehttps://github.com/frannbian/conexa-challange
+$ npm run test:e2e
 
 ```
 ## Plugins

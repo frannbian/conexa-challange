@@ -19,6 +19,16 @@ import { RolesGuard } from './users/guards/roles.guard';
   imports: [
     AuthModule,
     UsersModule,
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: process.env.DB_HOST,
+    //   port: parseInt(process.env.DB_PORT),
+    //   username: 'postgres',
+    //   password: 'root',
+    //   database: process.env.DB_NAME,
+    //   entities: [User, Movie, Director, Actor, Genre],
+    //   synchronize: true,
+    // }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'db',
@@ -27,7 +37,6 @@ import { RolesGuard } from './users/guards/roles.guard';
       password: 'postgres',
       database: 'postgres',
       synchronize: true,
-      autoLoadEntities: true,
       entities: [User, Movie, Director, Actor, Genre],
     }),
     MoviesModule,

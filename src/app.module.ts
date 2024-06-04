@@ -14,30 +14,24 @@ import { Director } from './directors/director.entity';
 import { Actor } from './actors/actor.entity';
 import { Genre } from './genres/genre.entity';
 import { RolesGuard } from './users/guards/roles.guard';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
-    // TypeOrmModule.forRoot({
-    //   type: 'postgres',
-    //   host: process.env.DB_HOST,
-    //   port: parseInt(process.env.DB_PORT),
-    //   username: 'postgres',
-    //   password: 'root',
-    //   database: process.env.DB_NAME,
-    //   entities: [User, Movie, Director, Actor, Genre],
-    //   synchronize: true,
-    // }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'db',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'postgres',
-      synchronize: true,
-      entities: [User, Movie, Director, Actor, Genre],
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USER'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_NAME'),
+        synchronize: true,
+        entities: [User, Movie, Director, Actor, Genre],
+      }),
     }),
     MoviesModule,
   ],

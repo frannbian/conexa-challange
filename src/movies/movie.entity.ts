@@ -1,7 +1,7 @@
-import { Actor } from 'src/actors/actor.entity';
-import { Director } from 'src/directors/director.entity';
-import { Genre } from 'src/genres/genre.entity';
-import { User } from 'src/users/user.entity';
+import { Actor } from '../actors/actor.entity';
+import { Director } from '../directors/director.entity';
+import { Genre } from '../genres/genre.entity';
+import { User } from '../users/user.entity';
 import {
   Entity,
   Column,
